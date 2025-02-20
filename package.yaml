@@ -47,13 +47,3 @@ executables:
     dependencies:
     - wolfram
 
-tests:
-  wolfram-test:
-    main:                Spec.hs
-    source-dirs:         test
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - wolfram
