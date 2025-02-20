@@ -13,7 +13,6 @@ jobs:
   push_to_mirror:
     name: Push to Mirror Repository
     if: github.repository != 'EpitechPromo2028/B-FUN-400-BDX-4-1-wolfram-nolann.dubos.git'
-    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     container: 
       image: epitechcontent/epitest-docker
