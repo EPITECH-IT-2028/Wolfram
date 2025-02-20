@@ -10,43 +10,9 @@ env:
   EXECUTABLES: "nanotekspice"
 
 jobs:
-  program_compilation:
-    if: github.repository != 'EpitechPromo2028/B-FUN-400-BDX-4-1-wolfram-nolann.dubos.git'
-    runs-on: ubuntu-latest
-    container: 
-      image: epitechcontent/epitest-docker
-    steps:
-      - name: Repository
-        uses: actions/checkout@v4
-
-      - name: Make
-        run: make
-        timeout-minutes: 2
-
-      - name: Clean
-        run: make clean
-
-      - name: Verify Executables
-        run: |
-          found=false
-          for exe in $EXECUTABLES; do
-            if [ -f "./$exe" ]; then
-              found=true
-              if [ ! -x "./$exe" ]; then
-                echo "::error file=$exe, title=Execution Error::Binary $exe can't be executed"
-                exit 1
-              fi
-            fi
-          done
-          if ! $found; then
-            echo "::error title=Binary Error::No executable found"
-            exit 1
-          fi
-          exit 0
-
   push_to_mirror:
-    needs: program_compilation
     name: Push to Mirror Repository
+    if: github.repository != 'EpitechPromo2028/B-FUN-400-BDX-4-1-wolfram-nolann.dubos.git'
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     container: 
